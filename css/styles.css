@@ -256,6 +256,10 @@ body {
   line-height: 1.87;
   letter-spacing: 0.06em;
 }
+.btn-send:hover {
+  transition: transform var(--timing-function);
+  background-color: #188ce8;
+}
 .send-icon {
   fill: var(--text-color-white);
   margin-left: 10px;
@@ -523,6 +527,7 @@ body {
 }
 .link-clients:hover,
 .link-clients:focus {
+  transition: var(--timing-function);
   color: var(--text-color-accent);
   border: 1px solid var(--text-color-accent);
 }
@@ -584,6 +589,7 @@ body {
 /* conteiner-card */
 
 .portfolio-list {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   margin: -15px;
@@ -607,7 +613,18 @@ body {
   padding: 20px 24px;
   margin: 0px;
 }
-.action-card p {
+
+.activ-box .img-text {
+  position: absolute;
+  transform: translateY(100%);
+  transition: transform var(--timing-function);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  padding: 63px 24px;
+  margin: 0;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -615,24 +632,12 @@ body {
   line-height: 1.55;
   letter-spacing: 0.03em;
   color: #ffffff;
-}
-.action-card {
-  position: absolute;
-  transform: translateY(100%);
-  transition: transform var(--timing-function);
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  padding: 63px 24px;
-  margin: 0;
-  color: #ffffff;
   background-color: rgba(33, 150, 243, 0.9);
 }
 .activ-box {
   display: block;
   position: relative;
+  overflow: hidden;
 }
 .conteiner > .card-name {
   font-weight: bold;
@@ -649,11 +654,14 @@ body {
   letter-spacing: 0.03em;
   color: var(--text-color-grey);
 }
-.card-link:hover .action-card {
+.card-link:hover .img-text {
   transform: translateY(0);
   overflow: hidden;
   opacity: 1;
   transition: transform var(--timing-function);
+}
+.card-link .conteiner {
+  position: relative;
 }
 
 /* modal-windows */
@@ -685,7 +693,6 @@ body {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  /* align-items: center; */
 }
 .modal-form {
   margin-bottom: 12px;
@@ -700,6 +707,26 @@ body {
   display: flex;
   flex-direction: column;
 }
+.item-input:focus,
+.box-comment:focus {
+  transition: transform var(--timing-function);
+  outline-color: var(--text-color-accent);
+}
+.item-input:focus + .modal-icon {
+  transition: transform var(--timing-function);
+  fill: var(--text-color-accent);
+}
+.box-icon {
+  position: relative;
+}
+.modal-icon {
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  transform: translate(-50%, -50%);
+  fill: var(--text-color-black);
+  cursor: pointer;
+}
 .form-item label {
   display: block;
   margin-bottom: 4px;
@@ -711,13 +738,15 @@ body {
   letter-spacing: 0.01em;
   color: var(--text-color-grey);
 }
-.form-item input {
+.box-icon input {
   display: block;
+  width: 100%;
   margin-bottom: 10px;
   padding: 12px 42px;
   border: 1px solid rgba(33, 33, 33, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
+  cursor: pointer;
 }
 .form-item textarea {
   padding: 12px 16px;
@@ -725,16 +754,45 @@ body {
   border: 1px solid rgba(33, 33, 33, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
+  cursor: pointer;
 }
-.label-name input {
+
+.label-name-check > input {
   margin-right: 9px;
+  cursor: pointer;
+}
+.label-name-check {
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.03em;
+  color: var(--text-color-grey);
 }
 .agreement {
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  /* line-height: 1.71; */
+  letter-spacing: 0.03em;
   margin-left: 5px;
+  padding: 0;
+  color: var(--text-color-accent);
+  border-bottom: 1px solid var(--text-color-accent);
 }
 .modal .label-check {
   display: flex;
+  align-items: center;
+  text-align: center;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .modal .btn-modal-send {
   padding: 10px 55px;
@@ -750,20 +808,31 @@ body {
   text-align: center;
   letter-spacing: 0.06em;
   color: var(--text-color-white);
-  background: #188ce8;
+  background: var(--text-color-accent);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
+  cursor: pointer;
+}
+.btn-modal-send:hover {
+  transition: transform var(--timing-function);
+  background-color: #188ce8;
 }
 .btn-close {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 23px;
+  right: 23px;
+  transform: translate(50%, -50%);
   width: 30px;
   height: 30px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   text-align: center;
+  cursor: pointer;
+}
+.btn-close:hover > .x-icon {
+  transition: transform var(--timing-function);
+  fill: var(--text-color-accent);
 }
 .x-icon {
   fill: black;
